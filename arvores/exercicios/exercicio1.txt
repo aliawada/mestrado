@@ -1,0 +1,59 @@
+Por Conjunto (cada nó com seus filhos):
+a = {b, c}
+b = {d, e}
+c = {f, g}
+d = {NULL, NULL}
+e = {h, i}
+f = {NULL, NULL}
+g = {NULL, NULL}
+h = {NULL, NULL}
+i = {NULL, NULL}
+
+Por Identação:
+a
+  b
+    d
+    e
+      h
+      i
+  c
+    f
+    g
+
+Por Grafo (representado com pares de conexões):
+a -> b  
+a -> c  
+b -> d  
+b -> e  
+e -> h  
+e -> i  
+c -> f  
+c -> g
+
+Grau, Altura e Profundidade
+Grau de um nó = número de filhos
+
+Altura de um nó = maior número de arestas até uma folha abaixo dele
+
+Profundidade = número de arestas da raiz até o nó
+
+| Nó | Grau | Altura | Profundidade |
+| -- | ---- | ------ | ------------ |
+| a  | 2    | 3      | 0            |
+| b  | 2    | 2      | 1            |
+| c  | 2    | 1      | 1            |
+| d  | 0    | 0      | 2            |
+| e  | 2    | 1      | 2            |
+| f  | 0    | 0      | 2            |
+| g  | 0    | 0      | 2            |
+| h  | 0    | 0      | 3            |
+| i  | 0    | 0      | 3            |
+
+Caminhos a partir da raiz a
+| Caminho       | Comprimento |
+| ------------- | ----------- |
+| a → b → d     | 2           |
+| a → b → e → h | 3           |
+| a → b → e → i | 3           |
+| a → c → f     | 2           |
+| a → c → g     | 2           |

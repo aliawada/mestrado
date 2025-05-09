@@ -1,0 +1,25 @@
+Exercício 2 – Definição de árvore binária a partir de árvore n-ária
+🌱 Árvore n-ária:
+
+É uma estrutura em que cada nó pode ter até n filhos. Ela é definida recursivamente como:
+
+    É vazia, ou
+
+    Tem um nó raiz e zero ou mais subárvores organizadas como filhos desse nó.
+	
+Definição de árvore binária:
+
+A árvore binária é um caso particular da árvore n-ária onde n = 2, ou seja, cada nó tem no máximo dois filhos, chamados:
+
+    Filho esquerdo (left)
+
+    Filho direito (right)
+
+Formalmente:
+
+    Uma árvore binária é uma estrutura de dados que:
+
+        É vazia, ou
+
+        Consiste em um nó (raiz), um ponteiro para uma subárvore esquerda e um ponteiro para uma subárvore direita.
+		
