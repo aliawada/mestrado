@@ -1,0 +1,23 @@
+Vantagens
+
+    Aproveitamento de espaço: a estática reutiliza posições liberadas sem mover elementos.
+
+    Operações O(1) para enfileirar/desenfileirar em ambas, sem realocar ou deslocar.
+
+    Uniformidade: no encadeado, não há casos especiais de “início” vs. “fim”; oferece tratamento simétrico.
+
+Desvantagens
+
+    Tamanho fixo (estática): a capacidade é limitada e definida em tempo de compilação.
+
+    Gerenciamento de memória (encadeada): overhead de alocações/frees e ponteiro extra.
+
+    Complexidade mental: índices modulares ou ponteiros circulares podem confundir iniciantes.
+
+Problemas que resolve
+
+    Fragmentação interna na estática (sem “buracos” desperdiçados após dequeues).
+
+    Custo de realocação em filas estáticas simples que deslocam elementos para o início a cada dequeue.
+
+    Unificação de casos (não mais duas estruturas distintas para início/fim no encadeado), facilitando enfileiramento rápido e contínuo.

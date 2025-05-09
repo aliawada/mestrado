@@ -1,0 +1,3 @@
+"Todas as TADs estudadas (Fila, Pilha, Lista Encadeada, Lista Generalizada) possuem características em comum, principalmente o uso de estruturas encadeadas. Assim, é possível generalizar suas implementações criando tipos básicos de nó e funções genéricas de manipulação de nós (inserção, remoção, percurso). Cada TAD especializa o comportamento de inserção e remoção conforme sua lógica (LIFO, FIFO, etc).
+
+Além disso, o reaproveitamento de código pode ser maximizado usando funções genéricas de manipulação de memória, navegação e contagem. A especialização pode ser feita com o uso de ponteiros para tipos genéricos (void*) e callbacks, permitindo que as mesmas funções operem sobre diferentes tipos de dados. Essas práticas promovem código mais limpo, modular e reutilizável."
