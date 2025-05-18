@@ -6,7 +6,8 @@
 #define MAP_WIDTH 10
 #define MAP_HEIGHT 10
 
-// Mostra o grafo do grid como coordenadas (ignora obstáculos)
+// Essa função imprime a matriz (grid) mostrando as coordenadas dos nós livres
+// Isso ajuda a visualizar a estrutura como um grafo
 void print_graph_coords(int grid[MAP_HEIGHT][MAP_WIDTH]) {
     printf("Visualização do grafo (coordenadas dos nós livres):\n\n");
     int y, x;

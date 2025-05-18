@@ -1,4 +1,4 @@
-// v4 refactored comentado
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "astar.c"
@@ -8,11 +8,9 @@
 #define MAP_WIDTH 10
 #define MAP_HEIGHT 10
 
-// Fun√ß√£o que mostra as coordenadas dos n√≥s livres do grid como um grafo
-void print_graph_coords(int grid[MAP_HEIGHT][MAP_WIDTH]);
-
+// FunÁ„o principal
 int main() {
-    // Grid do mapa: 0 = livre, 1 = obst√°culo
+    // Mapa com 0 = caminho livre e 1 = obst·culo
     int grid[MAP_HEIGHT][MAP_WIDTH] = {
         {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
         {0, 1, 1, 1, 0, 1, 0, 1, 1, 0},
@@ -26,21 +24,20 @@ int main() {
         {0, 1, 1, 1, 1, 1, 1, 1, 1, 0}
     };
 
-    // Ponto de in√≠cio e fim do caminho
+    // Ponto de inÌcio e fim
     Point start = {0, 0};
     Point end = {9, 9};
 
+    // Matriz visual que ser· preenchida pelo algoritmo
     char visual[MAP_HEIGHT][MAP_WIDTH];
 
-    // Mostrar o grafo por coordenadas
+    // Mostra graficamente os nÛs do grafo
     print_graph_coords(grid);
 
-    // Executar o algoritmo A*
+    // Chama o algoritmo A*
     if (a_star(grid, MAP_WIDTH, MAP_HEIGHT, start, end, visual)) {
         printf("\nMapa com caminho encontrado:\n\n");
-
         int y, x;
-        // Imprimir visualmente o caminho
         for (y = 0; y < MAP_HEIGHT; y++) {
             for (x = 0; x < MAP_WIDTH; x++) {
                 printf("%c ", visual[y][x]);
@@ -48,24 +45,8 @@ int main() {
             printf("\n");
         }
 
-        // Mostrar tabela de custos g, h e f
+        // Mostra os custos dos nÛs visitados
         print_g_f_h_table(MAP_WIDTH, MAP_HEIGHT);
-
-        extern Node nodes[10][10];
-        int total_path_cost = 0;
-        Point p = end;
-
-        // Soma do custo real (g) de cada n√≥ do caminho
-        while (!(nodes[p.y][p.x].parent_x == p.x && nodes[p.y][p.x].parent_y == p.y)) {
-            total_path_cost += nodes[p.y][p.x].g;
-            int px = nodes[p.y][p.x].parent_x;
-            int py = nodes[p.y][p.x].parent_y;
-            p.x = px;
-            p.y = py;
-        }
-        total_path_cost += nodes[p.y][p.x].g;
-
-        printf("\nSoma total dos custos dos n√≥s no caminho: %d\n", total_path_cost);
     } else {
         printf("Nenhum caminho encontrado.\n");
     }

@@ -1,0 +1,127 @@
+
+# Explicação Completa do Código - Algoritmo A*
+
+Este documento explica, de forma didática e detalhada, como funciona o código do algoritmo A* utilizado para encontrar o menor caminho entre dois pontos em um mapa com obstáculos.
+
+---
+
+## 🔧 Definições Iniciais
+
+```c
+#define INF 999999
+#define ABS(x) ((x) < 0 ? -(x) : (x))
+```
+
+- `INF`: representa o infinito — usado para inicializar custos ainda desconhecidos.
+- `ABS(x)`: retorna o valor absoluto de `x`, útil para calcular distâncias.
+
+---
+
+## 🧱 Estrutura do Nó
+
+```c
+typedef struct {
+    Point pt;
+    int g, h, f;
+    int parent_x, parent_y;
+    int in_open, in_closed;
+} Node;
+```
+
+Cada célula da grade é representada como um nó com:
+- `pt`: posição (x, y)
+- `g`: custo real desde o início até esse nó
+- `h`: estimativa até o destino
+- `f = g + h`: custo total
+- `parent`: de onde veio esse nó
+- `in_open`, `in_closed`: controle de nós visitados
+
+---
+
+## 🧠 Funções do Código
+
+### 1. `initialize_nodes(...)`
+
+Prepara os nós:
+- Define obstáculos e espaços livres
+- Define o nó inicial
+- Inicializa os custos
+
+> Relacionada diretamente ao início do algoritmo A*.
+
+---
+
+### 2. `heuristic(...)`
+
+Calcula a distância de Manhattan entre dois pontos:
+```
+h(n) = |x1 - x2| + |y1 - y2|
+```
+
+> Ajuda o A* a estimar quanto ainda falta para o destino.
+
+---
+
+### 3. `is_valid(...)`
+
+Verifica se uma coordenada está dentro do mapa e é livre.
+
+---
+
+### 4. `get_lowest_f(...)`
+
+Retorna o nó com o menor valor `f` na lista de abertos.
+
+---
+
+### 5. `update_neighbors(...)`
+
+Para cada vizinho válido:
+- Calcula novo `g`, `h`, `f`
+- Atualiza se o novo caminho for melhor
+
+---
+
+### 6. `reconstruct_path(...)`
+
+Depois de alcançar o destino, reconstrói o caminho marcado com `.`.
+
+---
+
+### 7. `a_star(...)`
+
+É o algoritmo principal:
+- Chama todas as funções auxiliares
+- Controla o loop de busca
+- Termina ao encontrar o destino
+
+---
+
+### 8. `main()`
+
+Define o mapa, início e fim. Chama o A*, imprime resultados.
+
+---
+
+### 9. `print_g_f_h_table(...)`
+
+Mostra os custos `g`, `h`, `f` de cada nó visitado.
+
+---
+
+### 10. `print_graph_coords(...)`
+
+Mostra o grafo de forma textual usando as coordenadas dos nós.
+
+---
+
+## ✅ Conclusão
+
+- A* é uma forma eficiente de encontrar o caminho mais curto.
+- Usa estimativa (`h`) e custo real (`g`) para guiar a busca.
+- A heurística usada (Manhattan) é admissível: nunca superestima.
+- O algoritmo se adapta ao encontrar caminhos melhores.
+
+---
+
+**Arquivo gerado automaticamente por ChatGPT para fins acadêmicos e educativos.**

@@ -2,26 +2,23 @@
 #ifndef ASTAR_H
 #define ASTAR_H
 
-// Define um ponto no grid com coordenadas x e y
+// Estrutura que representa uma coordenada (x, y)
 typedef struct {
     int x, y;
 } Point;
 
-// Estrutura de um nó usado no algoritmo A*
+// Estrutura de cada nó da grade (grafo implícito)
 typedef struct {
-    Point pt;             // posição no grid
-    int g, h, f;          // custos: g (real), h (estimado), f (g + h)
-    int parent_x, parent_y; // coordenadas do nó pai
-    int in_open, in_closed; // flags para lista aberta e fechada
+    Point pt;             // Coordenada atual
+    int g, h, f;          // Custos: g (real), h (estimado), f = g + h
+    int parent_x, parent_y; // Coordenadas do nó "pai", usado para reconstruir o caminho
+    int in_open, in_closed; // Flags que indicam se o nó está na lista aberta ou fechada
 } Node;
 
-// Matriz global de nós
+// Matriz global com os nós do mapa
 extern Node nodes[10][10];
 
-// Função principal do algoritmo A*
+// Função principal do A*
 int a_star(int grid[][10], int width, int height, Point start, Point end, char visual[][10]);
-
-// Imprime os valores g, h, f dos nós visitados
-void print_g_f_h_table(int width, int height);
 
 #endif
