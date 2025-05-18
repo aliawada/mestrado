@@ -8,19 +8,19 @@
 #define INF 999999 // Um valor bem grande usado como "infinito"
 #define ABS(x) ((x) < 0 ? -(x) : (x)) // Calcula valor absoluto (sem sinal negativo)
 
-// Aqui fica a matriz global que guarda todos os nÃ³s do mapa
+// Aqui fica a matriz global que guarda todos os nós do mapa
 Node nodes[10][10];
 
-/// Essa funÃ§Ã£o inicializa todos os nÃ³s da grade.
-/// Ela tambÃ©m define quem Ã© o inÃ­cio (S) e quem Ã© o fim (E).
+/// Essa função inicializa todos os nós da grade.
+/// Ela também define quem é o início (S) e quem é o fim (E).
 void initialize_nodes(int width, int height, int grid[][10], char visual[][10], Point start, Point end) {
     int x, y;
     for (y = 0; y < height; y++) {
         for (x = 0; x < width; x++) {
-            // Se for 1 no grid, Ã© obstÃ¡culo (#), senÃ£o Ã© espaÃ§o livre
+            // Se for 1 no grid, é obstáculo (#), senão é espaço livre
             visual[y][x] = grid[y][x] ? '#' : ' ';
 
-            // Inicializa cada nÃ³ com dados padrÃ£o (infinito, sem pai ainda)
+            // Inicializa cada nó com dados padrão (infinito, sem pai ainda)
             nodes[y][x] = (Node){
                 .pt = {x, y},
                 .g = INF, .h = 0, .f = INF,
@@ -30,35 +30,35 @@ void initialize_nodes(int width, int height, int grid[][10], char visual[][10], 
         }
     }
 
-    // Marcar inÃ­cio e fim visualmente no mapa
+    // Marcar inpicio e fim visualmente no mapa
     visual[start.y][start.x] = 'S';
     visual[end.y][end.x] = 'E';
 
-    // Configura o nÃ³ inicial (g=0 porque nÃ£o andamos nada ainda)
+    // Configura o nó inicial (g=0 porque não andamos nada ainda)
     nodes[start.y][start.x].g = 0;
-    nodes[start.y][start.x].h = heuristic(start, end); // estimativa de distÃ¢ncia atÃ© o fim
+    nodes[start.y][start.x].h = heuristic(start, end); // estimativa de distáncia até o fim
     nodes[start.y][start.x].f = nodes[start.y][start.x].h;
     nodes[start.y][start.x].parent_x = start.x;
     nodes[start.y][start.x].parent_y = start.y;
-    nodes[start.y][start.x].in_open = 1; // nÃ³ estÃ¡ na lista aberta (ainda serÃ¡ avaliado)
+    nodes[start.y][start.x].in_open = 1; // não está na lista aberta (ainda será avaliado)
 }
 
-/// Essa funÃ§Ã£o calcula a "distÃ¢ncia" entre dois pontos
-/// Aqui usamos a distÃ¢ncia de Manhattan (sem diagonais)
+/// Essa função calcula a "distáncia" entre dois pontos
+/// Aqui usamos a distáncia de Manhattan (sem diagonais)
 int heuristic(Point a, Point b) {
     return ABS(a.x - b.x) + ABS(a.y - b.y);
 }
 
-/// Verifica se a posiÃ§Ã£o (x, y) estÃ¡ dentro dos limites do mapa e Ã© um caminho livre
+/// Verifica se a posição (x, y) está dentro dos limites do mapa e é um caminho livre
 int is_valid(int x, int y, int width, int height, int grid[][10]) {
     return x >= 0 && y >= 0 && x < width && y < height && grid[y][x] == 0;
 }
 
-/// Quando a gente chega no destino, essa funÃ§Ã£o reconstrÃ³i o caminho final
+/// Quando a gente chega no destino, essa função reconstrói o caminho final
 /// e desenha ele no mapa usando '.'
 void reconstruct_path(Point end, char visual[][10], Point start) {
     Point p = end;
-    // Anda de trÃ¡s pra frente, indo dos pais atÃ© o inÃ­cio
+    // Anda de trás pra frente, indo dos pais até o início
     while (!(nodes[p.y][p.x].parent_x == p.x && nodes[p.y][p.x].parent_y == p.y)) {
         if (!(p.x == end.x && p.y == end.y)) {
             visual[p.y][p.x] = '.'; // marca caminho
@@ -70,20 +70,20 @@ void reconstruct_path(Point end, char visual[][10], Point start) {
     }
 }
 
-/// Atualiza os vizinhos (cima, baixo, esquerda, direita) do nÃ³ atual
+/// Atualiza os vizinhos (cima, baixo, esquerda, direita) do nó atual
 void update_neighbors(int cx, int cy, int dx[], int dy[], int width, int height, int grid[][10], Point end) {
     int i;
     for (i = 0; i < 4; i++) {
         int nx = cx + dx[i];
         int ny = cy + dy[i];
 
-        // Pula se for posiÃ§Ã£o invÃ¡lida ou jÃ¡ visitada
+        // Pula se for posição inválida ou já visitada
         if (!is_valid(nx, ny, width, height, grid)) continue;
         if (nodes[ny][nx].in_closed) continue;
 
         int tentative_g = nodes[cy][cx].g + 1; // custo de andar para vizinho
 
-        // Se for melhor que o valor anterior ou nÃ£o tiver sido visitado ainda
+        // Se for melhor que o valor anterior ou não tiver sido visitado ainda
         if (!nodes[ny][nx].in_open || tentative_g < nodes[ny][nx].g) {
             nodes[ny][nx].pt.x = nx;
             nodes[ny][nx].pt.y = ny;
@@ -97,7 +97,7 @@ void update_neighbors(int cx, int cy, int dx[], int dy[], int width, int height,
     }
 }
 
-/// Escolhe o nÃ³ da lista aberta que tem o menor f (mais promissor)
+/// Escolhe o nó da lista aberta que tem o menor f (mais promissor)
 int get_lowest_f(int width, int height, int* out_x, int* out_y) {
     int min_f = INF, x, y;
     *out_x = -1;
@@ -115,8 +115,8 @@ int get_lowest_f(int width, int height, int* out_x, int* out_y) {
     return min_f;
 }
 
-/// Essa Ã© a funÃ§Ã£o principal do A*
-/// Ela percorre o mapa e busca o menor caminho do inÃ­cio ao fim
+/// Essa é a função principal do A*
+/// Ela percorre o mapa e busca o menor caminho do início ao fim
 int a_star(int grid[][10], int width, int height, Point start, Point end, char visual[][10]) {
     initialize_nodes(width, height, grid, visual, start, end);
     int dx[4] = {0, -1, 1, 0}; // deslocamentos em x (esquerda/direita)
@@ -125,9 +125,9 @@ int a_star(int grid[][10], int width, int height, Point start, Point end, char v
     while (1) {
         int cx, cy;
         int min_f = get_lowest_f(width, height, &cx, &cy);
-        if (cx == -1) return 0; // Se nÃ£o tem mais nÃ³ aberto, nÃ£o achou caminho
+        if (cx == -1) return 0; // Se não tem mais nó aberto, não achou caminho
 
-        // Marca o nÃ³ atual como fechado (jÃ¡ foi visitado)
+        // Marca o nó atual como fechado (já foi visitado)
         nodes[cy][cx].in_open = 0;
         nodes[cy][cx].in_closed = 1;
 
@@ -137,7 +137,7 @@ int a_star(int grid[][10], int width, int height, Point start, Point end, char v
             return 1;
         }
 
-        // Atualiza vizinhos do nÃ³ atual
+        // Atualiza vizinhos do nó atual
         update_neighbors(cx, cy, dx, dy, width, height, grid, end);
     }
 }
