@@ -1,0 +1,22 @@
+S0
+A0
+11, Calça Jeans, Taco, Azul, 40
+15, Calça Jeans, Levis, Preta, 44
+
+A1
+25, Bermuda, Levis, Laranja, 37
+28, Camiseta, Adidas, Branca, 42
+
+S1
+A0
+100, Saia, Joyaly, Florida, 36
+102, Vestido, Zara, Vermelho, 38
+
+A2
+200, Blusa, Hering, Azul Claro, 40
+203, Casaco, Puma, Preto, 42
+
+S2
+A1
+300, Camiseta, Nike, Verde, 44
+301, Short, Adidas, Azul, 38
