@@ -51,6 +51,8 @@ int a_star(int grid[][10], int width, int height, Point start, Point end, char v
     int dx[4] = {0, -1, 1, 0};
     int dy[4] = {-1, 0, 0, 1};
 
+    int found = 0;
+
     while (1) {
         int min_f = INF, cx = -1, cy = -1;
 
@@ -64,13 +66,18 @@ int a_star(int grid[][10], int width, int height, Point start, Point end, char v
             }
         }
 
-        if (cx == -1) return 0;
+        if (cx == -1)
+            break;
 
         nodes[cy][cx].in_open = 0;
         nodes[cy][cx].in_closed = 1;
 
         if (cx == end.x && cy == end.y) {
             alternative_g_values[alternative_g_count++] = nodes[cy][cx].g;
+            if (!found) {
+                reconstruct_path(nodes, end, visual, start);
+                found = 1;
+            }
             // Continue buscando outros caminhos mesmo depois de encontrar um
             continue;
         }
@@ -95,4 +102,6 @@ int a_star(int grid[][10], int width, int height, Point start, Point end, char v
             }
         }
     }
+
+    return found;
 }
