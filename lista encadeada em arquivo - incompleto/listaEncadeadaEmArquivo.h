@@ -21,9 +21,9 @@
  
 void cria_lista_vazia(FILE* arq);
 cabecalho* le_cabecalho(FILE * arq);
+void insere(FILE* arq, TipoItem info);
 void escreve_cabecalho(FILE* arq, cabecalho* cab);
 no* le_no(FILE* arq, int pos);
-void escreve_no(FILE* arq, no* x, int pos);
 void escreve_no(FILE* arq, no* x, int pos);
 void retira(FILE* arq, TipoItem x);
 

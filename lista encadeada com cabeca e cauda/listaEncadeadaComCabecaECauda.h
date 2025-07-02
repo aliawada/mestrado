@@ -1,5 +1,5 @@
-#ifndef LISTA_ENCADEADA_COM_CABECA_E_CAUSA_H
-#define LISTA_ENCADEADA_COM_CABECA_E_CAUSA_H
+#ifndef LISTA_ENCADEADA_COM_CABECA_E_CAUDA_H
+#define LISTA_ENCADEADA_COM_CABECA_E_CAUDA_H
 
 #include <stdlib.h> // malloc, free
 #include <stdio.h> // printf
